@@ -81,4 +81,9 @@ private:
 
 template<class>
 inline constexpr bool always_false_v = false;
+
+template<typename T>
+struct AlwaysFalse : std::false_type
+{ };
+
 #endif /* AUXILIARCLASSES_HPP_ */

@@ -1,9 +1,9 @@
 #include <iostream>
 #include <memory>
 #include <type_traits>
-#include <TemplateConstExprStrategy.hpp>
-#include <NoFactory.hpp>
-#include <UsualFactory.hpp>
+#include <TemplateStrategies/TemplateConstExprStrategy.hpp>
+#include <CommonStrategies/NoFactory.hpp>
+#include <CommonStrategies/UsualFactory.hpp>
 #include <SFINAEFactory.hpp>
 #include <TemplateSpecializationFactory.hpp>
 #include <TypeErasureAny.hpp>
@@ -14,7 +14,7 @@
 
 using namespace std;
 
-//The intent of this program is to show how different implementations about how a
+//The intend of this program is to show how different implementations about how a
 //factory may work
 int main(int argc, char **argv) {
 	cout << "Factories" << endl<< endl << endl;
@@ -33,10 +33,20 @@ int main(int argc, char **argv) {
 	trasnlatorUsual->translate();
 	cout << "****************" << endl << endl << endl;
 
-	cout << "** Factory Constexpr **" << endl;
-	FactoryTempConstExpr myFactory;
-	auto a = myFactory.createTranslator<Type1ToType2Translator>();
-	a->translate();
+	cout << "** Factory Constexpr (pointer) **" << endl;
+	FactoryTempConstExprPointer myConstExprPtrFactory;
+	auto translatorConstexprPtr = myConstExprPtrFactory.createTranslator<Type1ToType2Translator>();
+	translatorConstexprPtr->translate();
+	cout << "****************" << endl << endl << endl;
+
+	cout << "** Factory Constexpr (value) **" << endl;
+	FactoryTempConstExprValue myConstExprValFactory;
+	auto translatorConstexprVal = myConstExprValFactory.createTranslator<Type3ToType4Translator>();
+	translatorConstexprVal.translate();
+	// NOTICE THIS. It will crash. Why? Because the compiler will try to instantiate the else branch
+	// and the assert will always make it fail AT COMPILATION TIME
+	// uncomment NEXT LINE to try it
+	// auto translatorConstexprValCrash = myConstExprValFactory.createTranslator<Translator1>(); 
 	cout << "****************" << endl << endl << endl;
 
 	cout << "** Factory SFINAE **" << endl;

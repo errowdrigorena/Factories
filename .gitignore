@@ -1,4 +1,5 @@
 /build/
 /.metadata/
+/.vscode/
 .cproject
 .project
