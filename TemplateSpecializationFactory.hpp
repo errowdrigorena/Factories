@@ -8,7 +8,7 @@
 #ifndef TEMPLATESPECIALIZATIONFACTORY_HPP_
 #define TEMPLATESPECIALIZATIONFACTORY_HPP_
 
-#include <AuxiliarClasses.hpp>
+#include <AuxiliaryClasses/AuxiliarClasses.hpp>
 #include <memory>
 
 class FactoryTemplateSpecialization //would not work inside a class

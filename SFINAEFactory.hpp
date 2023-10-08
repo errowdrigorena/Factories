@@ -9,7 +9,7 @@
 #define SFINAEFACTORY_HPP_
 
 #include <type_traits>
-#include <AuxiliarClasses.hpp>
+#include <AuxiliaryClasses/AuxiliarClasses.hpp>
 
 using namespace std;
 

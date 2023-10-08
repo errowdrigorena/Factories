@@ -8,11 +8,13 @@
 #include <TemplateSpecializationFactory.hpp>
 #include <TypeErasureAny.hpp>
 #include <TypeErasureVariant.hpp>
-#include <FunctionalFactoryBoost.hpp>
+
+#include <boost/functional/factory.hpp>
+#include <boost/functional/value_factory.hpp>
 
 using namespace std;
 
-//The intent of this program is to show how different implementations of a
+//The intent of this program is to show how different implementations about how a
 //factory may work
 int main(int argc, char **argv) {
 	cout << "Factories" << endl<< endl << endl;

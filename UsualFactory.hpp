@@ -2,7 +2,7 @@
 #include <iostream>
 #include <unordered_map>
 
-#include <AuxiliarClasses.hpp>
+#include <AuxiliaryClasses/AuxiliarClasses.hpp>
 
 
 using namespace std;
