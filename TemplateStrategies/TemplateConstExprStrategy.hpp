@@ -10,7 +10,7 @@
 
 #include <memory>
 #include <type_traits>
-#include <AuxiliaryClasses/AuxiliarClasses.hpp>
+#include <AuxiliarClasses.hpp>
 
 using namespace std;
 

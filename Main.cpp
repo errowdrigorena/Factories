@@ -1,9 +1,9 @@
 #include <iostream>
 #include <memory>
 #include <type_traits>
-#include <TemplateStrategies/TemplateConstExprStrategy.hpp>
-#include <CommonStrategies/NoFactory.hpp>
-#include <CommonStrategies/UsualFactory.hpp>
+#include <TemplateConstExprStrategy.hpp>
+#include <NoFactory.hpp>
+#include <UsualFactory.hpp>
 #include <SFINAEFactory.hpp>
 #include <TemplateSpecializationFactory.hpp>
 #include <TypeErasureAny.hpp>
@@ -57,13 +57,17 @@ int main(int argc, char **argv) {
 	translatorSfinae2.translate();
 	cout << "****************" << endl << endl << endl;
 
-	cout << "** Factory Template Specialization **" << endl;
+	cout << "** Factory Template Specialization Differente kind of initialitation**" << endl;
 	FactoryTemplateSpecialization factoryTemplateSpecialization;
-	auto translatorTemplateSpecializationFails = factoryTemplateSpecialization.createTranslator<Type1ToType2Translator>();
+	// As above, this will crash. Why? Because the less specialized template member function will be called
+	// this function is the one that has an allways failing static_assert (COMPILATION TIME assert)
+	// uncomment NEXT LINE to try it
+	// auto translatorTemplateSpecializationFails = factoryTemplateSpecialization.createTranslator<Type1ToType2Translator>();
 	auto translatorTemplateSpecialization5To6= factoryTemplateSpecialization.createTranslator<Type5ToType6Translator>();
-	translatorTemplateSpecialization5To6->translate();
+	translatorTemplateSpecialization5To6.translate();
+
 	auto translatorTemplateSpecialization7To8= factoryTemplateSpecialization.createTranslator<Type7ToType8Translator>();
-	translatorTemplateSpecialization7To8->translate();
+	translatorTemplateSpecialization7To8.translate();
 	cout << "****************" << endl << endl << endl;
 
 	cout << "** Factory Type Erasure Variant **" << endl;

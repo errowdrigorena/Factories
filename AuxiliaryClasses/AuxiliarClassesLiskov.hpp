@@ -57,7 +57,7 @@ private:
 	}
 };
 
-enum class TranslatorTypes
+enum class TranslatorTypesLiskov
 {
 	Translator1Liskov,
 	Translator2Liskov

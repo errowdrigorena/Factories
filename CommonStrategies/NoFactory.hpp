@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include <AuxiliaryClasses/AuxiliarClasses.hpp>
+#include <AuxiliarClasses.hpp>
 
 using namespace std;
 
