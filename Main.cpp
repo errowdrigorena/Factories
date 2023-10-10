@@ -70,6 +70,25 @@ int main(int argc, char **argv) {
 	translatorTemplateSpecialization7To8.translate();
 	cout << "****************" << endl << endl << endl;
 
+	cout << "** Factory Template Specialization LISKOV**" << endl;
+	FactoryTemplateSpecializationRegularAndLiskov factoryTemplateSpecializationLiskov;
+	
+	// In the following lines it is shown how easy it can be to use an object based strategy
+	// with pointers
+	auto translatorLiskov{static_cast<unique_ptr<BaseTranslatorLiskov>>
+		(make_unique<Translator1Liskov>
+		(factoryTemplateSpecializationLiskov.createTranslator<Translator1Liskov>())) };
+	translatorLiskov->translate();
+	
+	translatorLiskov = make_unique<Translator2Liskov>(
+		factoryTemplateSpecializationLiskov.createTranslator<Translator2Liskov>());
+	translatorLiskov->translate();
+
+	// This will crash. Why? Because it doesn't exist a createTranslator function for non
+	// BaseTranslatorLiskov bases
+	// auto translatorTemplateSpecialization5To6Liskov= factoryTemplateSpecializationLiskov.createTranslator<Type5ToType6Translator>();
+	cout << "****************" << endl << endl << endl;
+
 	cout << "** Factory Type Erasure Variant **" << endl;
 	FactoryTypeErasureVariant factoryTypeErasureVariant;
 	auto translatorVariant1To2 = factoryTypeErasureVariant.create(TranslatorTypesBT::Type1ToType2Translator);
