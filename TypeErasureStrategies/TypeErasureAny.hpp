@@ -13,11 +13,15 @@
 #include <typeindex>
 #include <functional>
 #include <iomanip>
+#include <variant>
 
 #include <AuxiliaryClasses/AuxiliarClasses.hpp>
 
 using namespace std;
 
+// this is a helper function to create the map
+// it takes a type and a function that will be called when the type is found
+// it returns a pair with the type and the function
 template<class T, class F>
 inline pair<const type_index, function<void(const any&)>>
     to_any_visitor(F const &f)
@@ -39,6 +43,10 @@ inline pair<const type_index, function<void(const any&)>>
     };
 }
 
+// this is the map that will hold the handlers for each type
+// it is static so it is initialized only once
+// it is an unordered_map so the lookup is O(1)
+// it is global, maybe other solution is better for you
 static unordered_map<type_index, function<void(const any&)>>
     any_visitor
 {
@@ -47,13 +55,19 @@ static unordered_map<type_index, function<void(const any&)>>
     // ... add more handlers for your types ...
 };
 
+// this is the function that will call the correct handler
+// it just uses the previous map to find the correct handler
 inline void process(const any& a)
 {
     if (const auto it = any_visitor.find(std::type_index(a.type()));
         it != any_visitor.cend())
-        it->second(a);
-    else
-        std::cout << "Unregistered type "<< std::quoted(a.type().name());
+	{
+		it->second(a);
+	}
+	else
+	{
+		std::cout << "Unregistered type "<< std::quoted(a.type().name());
+	}
 }
 
 class FactoryTypeErasure
@@ -71,8 +85,9 @@ public:
 		}
 		else
 		{
-			cout << "Invalid" << endl;
-			return 0;
+			cerr << "Invalid" << endl;
+			return monostate{};
+			// a better alternative could be an assert or throwing an exception
 		}
 	}
 
@@ -89,7 +104,8 @@ public:
 		}
 		else
 		{
-			cout << "Invalid" << endl;
+			cerr << "Invalid" << endl;
+			// a better alternative could be an assert or throwing an exception
 		}
 	}
 

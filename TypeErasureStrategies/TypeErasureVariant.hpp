@@ -44,8 +44,7 @@ public:
 		else
 		{
 			myTranslator = monostate{};
-			// a better alternative could be an assert or throw an exception
-
+			// a better alternative could be an assert or throwing an exception
 		}
 		return myTranslator;
 	}
