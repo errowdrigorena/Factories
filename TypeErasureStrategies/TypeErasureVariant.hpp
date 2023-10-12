@@ -10,12 +10,17 @@
 
 #include <variant>
 
-#include <AuxiliaryClasses/AuxiliarClasses.hpp>
+#include <AuxiliarClasses.hpp>
 
 using namespace std;
 
-using Translators = variant<Type1ToType2Translator, Type3ToType4Translator, int>;
+// monostate is a type that can hold no value. It is the type of the default-constructed 
+// std::variant and std::any. With this it can be guaranteed that the variant is default-constructive.
+// in this case, it is used to indicate that the variant is not initialized, that the factory has not
+// created any translator successfully.
+using Translators = variant<monostate, Type1ToType2Translator, Type3ToType4Translator>;
 
+// overload pattern is used to perform different actions depending on the type of the variant
 template<class... Ts>
 struct overloaded : Ts... { using Ts::operator()...; };
 // explicit deduction guide (not needed as of C++20)
@@ -38,8 +43,9 @@ public:
 		}
 		else
 		{
-			myTranslator = 0;
-			cout << "Invalid CREATION" << endl; //put an assert here instead
+			myTranslator = monostate{};
+			// a better alternative could be an assert or throw an exception
+
 		}
 		return myTranslator;
 	}
@@ -47,8 +53,8 @@ public:
 	void performTranslation(Translators translator)
 	{
 		visit(overloaded{[](auto val){val.translate();},
-			  [](int val){cout << "Invalid TRANSLATION" << val << endl;}},
-				translator);
+			  			 []([[maybe_unused]]monostate val){cout << "Invalid TRANSLATION" << endl;}},
+						 translator);
 	}
 };
 
