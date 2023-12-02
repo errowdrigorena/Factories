@@ -8,6 +8,8 @@
 #include <TemplateSpecializationFactory.hpp>
 #include <TypeErasureAny.hpp>
 #include <TypeErasureVariant.hpp>
+#include <Translator1Creator.hpp>
+#include <Translator2Creator.hpp>
 
 #include <boost/functional/factory.hpp>
 #include <boost/functional/value_factory.hpp>
@@ -19,7 +21,7 @@ using namespace std;
 int main(int argc, char **argv) {
 	cout << "Factories" << endl<< endl << endl;
 
-	cout << "** No Factory **" << endl;
+	cout << "** No Factory (it really is, maybe a better name could be functional old fashion factory) **" << endl;
 	NoFactory myNoFactory;
 	myNoFactory.getType1ToType2Translator().translate();
 	myNoFactory.getType3ToType4Translator().translate();
@@ -111,5 +113,10 @@ int main(int argc, char **argv) {
 	boostTranslatorValue.translate();
 	cout << "****************" << endl << endl << endl;
 
+	cout << "** Traditional Factory Method **" << endl;
+	unique_ptr<Creator> translatorCreator = make_unique<Translator1Creator>();
+	translatorCreator->translate();
+	translatorCreator = make_unique<Translator2Creator>();
+	translatorCreator->translate();
 	return 0;
 }

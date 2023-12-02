@@ -11,4 +11,5 @@ target_include_directories(DummyFactory PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/AuxiliaryClasses
     ${CMAKE_CURRENT_SOURCE_DIR}/CommonStrategies
     ${CMAKE_CURRENT_SOURCE_DIR}/TemplateStrategies
-    ${CMAKE_CURRENT_SOURCE_DIR}/TypeErasureStrategies)
+    ${CMAKE_CURRENT_SOURCE_DIR}/TypeErasureStrategies
+    ${CMAKE_CURRENT_SOURCE_DIR}/TraditionalFactoryMethod)
