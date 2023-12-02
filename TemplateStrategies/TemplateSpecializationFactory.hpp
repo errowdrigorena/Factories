@@ -69,7 +69,11 @@ typename enable_if<!is_base_of_v<T, T>, T>::type createTranslator()
 }*/
 
 //***********************************************************************************
-//now we will use the same approach but with input parameters in the function
+// now we will use the same approach but with input parameters in the function
+// note that this specialiazation is not a normal one it is indeed a factory method
+// it is as powerful as it is dangerous. No checks are done at compilation time
+// and it is possible to call to this function with a type that is not intended to be accepted
+// but please look at the example in the main.cpp file
 class FactoryTemplateSpecializationRegularAndLiskovWithParameters 
 {
 public:
