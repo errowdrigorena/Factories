@@ -10,6 +10,7 @@
 #include <TypeErasureVariant.hpp>
 #include <Translator1Creator.hpp>
 #include <Translator2Creator.hpp>
+#include <GenericFactoryMethod.hpp>
 
 #include <boost/functional/factory.hpp>
 #include <boost/functional/value_factory.hpp>
@@ -127,6 +128,16 @@ int main(int argc, char **argv) {
 	translatorCreator->translate();
 	cout << "****************" << endl << endl << endl;
 
+	cout << "** Generic Factory Method **" << endl;
+	GenericConcreteCreator<BaseTranslatorLiskov, Translator1Liskov> Translator1LiskovGeneric;
+	Translator1LiskovGeneric.translate();
+	GenericConcreteCreator<BaseTranslatorLiskov, Translator2Liskov> Translator2LiskovGeneric;
+	Translator2LiskovGeneric.translate();
+	GenericConcreteCreator<BaseTranslatorLiskovWithArgs, Translator1LiskovWithArgs, int, double> Translator1LiskovGenericWithArgs;
+	Translator1LiskovGenericWithArgs.translate(1, 2.0);
+	GenericConcreteCreator<BaseTranslatorLiskovWithArgs, Translator2LiskovWithArgs, int, double> Translator2LiskovGenericWithArgs;
+	Translator2LiskovGenericWithArgs.translate(3, 4.5);
+	cout << "****************" << endl << endl << endl;
 
 	return 0;
 }
