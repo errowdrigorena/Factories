@@ -68,4 +68,29 @@ typename enable_if<!is_base_of_v<T, T>, T>::type createTranslator()
 	return T{}; //IT WILL NEVER BE EXECUTED
 }*/
 
+//***********************************************************************************
+//now we will use the same approach but with input parameters in the function
+class FactoryTemplateSpecializationRegularAndLiskovWithParameters 
+{
+public:
+	template<typename T, typename... Args>
+	void translate(Args&&... args);
+private:
+	template<typename T>
+	T createTranslator();
+};
+
+template <typename T>
+T FactoryTemplateSpecializationRegularAndLiskovWithParameters::createTranslator()
+{
+	return T{};
+}
+
+template<typename T, typename... Args>
+void FactoryTemplateSpecializationRegularAndLiskovWithParameters::translate(Args&&... args)
+{
+	auto translator{createTranslator<T>()};
+	translator.translate(forward<Args>(args)...);
+}
+
 #endif /* TEMPLATESPECIALIZATIONFACTORY_HPP_ */

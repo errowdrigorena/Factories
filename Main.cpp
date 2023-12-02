@@ -91,6 +91,13 @@ int main(int argc, char **argv) {
 	// auto translatorTemplateSpecialization5To6Liskov= factoryTemplateSpecializationLiskov.createTranslator<Type5ToType6Translator>();
 	cout << "****************" << endl << endl << endl;
 
+	cout << "** Factory Template Specialization LISKOV with parameters**" << endl;
+	FactoryTemplateSpecializationRegularAndLiskovWithParameters factoryTemplateSpecializationLiskovWithParameters;	
+	factoryTemplateSpecializationLiskovWithParameters.translate<Translator1LiskovWithArgs>(1, 2.0);
+	factoryTemplateSpecializationLiskovWithParameters.translate<Translator2LiskovWithArgs>(3, 4.5);
+	factoryTemplateSpecializationLiskovWithParameters.translate<Translator1Liskov>();
+	cout << "****************" << endl << endl << endl;
+
 	cout << "** Factory Type Erasure Variant **" << endl;
 	FactoryTypeErasureVariant factoryTypeErasureVariant;
 	auto translatorVariant1To2 = factoryTypeErasureVariant.create(TranslatorTypesBT::Type1ToType2Translator);
@@ -118,5 +125,8 @@ int main(int argc, char **argv) {
 	translatorCreator->translate();
 	translatorCreator = make_unique<Translator2Creator>();
 	translatorCreator->translate();
+	cout << "****************" << endl << endl << endl;
+
+
 	return 0;
 }

@@ -63,4 +63,28 @@ enum class TranslatorTypesLiskov
 	Translator2Liskov
 };
 
+// Now we will try the same but with arguments in the calle method.
+class BaseTranslatorLiskovWithArgs
+{
+public:
+	virtual void translate(int arg1, double arg2) = 0;
+};
+
+class Translator1LiskovWithArgs : public BaseTranslatorLiskovWithArgs
+{
+public:
+	void translate(int arg1, double arg2) override
+	{
+		cout << "Translator1LiskovWithArgs arg1 = " << arg1 << " arg2 = " << arg2 << endl;
+	}
+};
+
+class Translator2LiskovWithArgs : public BaseTranslatorLiskovWithArgs
+{
+public:
+	void translate(int arg1, double arg2) override
+	{
+		cout << "Translator2LiskovWithArgs arg1 = " << arg1 << " arg2 = " << arg2 << endl;
+	}
+};
 #endif /* AUXILIARCLASSESLISKOV_HPP_ */
