@@ -56,7 +56,7 @@ template<typename T>
 typename enable_if<is_base_of_v<BaseTranslatorLiskov, T>, T>::type 
 	FactoryTemplateSpecializationRegularAndLiskov::createTranslator()
 {
-	return T{}; //IT WILL NEVER BE EXECUTED
+	return T{};
 }
 
 // even when it is not needed at all, if we use the netion of enable_if,

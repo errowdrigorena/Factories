@@ -10,10 +10,6 @@ using namespace std;
  * Note that its responsibility is just to translate.
  */
 class Creator {
-  /**
-   * Note that the Creator may also provide some default implementation of the
-   * factory method.
-   */
  public:
   virtual ~Creator(){};
   virtual unique_ptr<BaseTranslatorLiskov> FactoryMethod() const = 0;
@@ -23,7 +19,7 @@ class Creator {
     // Call the factory method to create a Tranlator object.
     // Which one? It will depend on the concrete creator.
     auto translator{move(this->FactoryMethod())};
-    // Use it to translate
+    
     translator->translate();
   }
 };
